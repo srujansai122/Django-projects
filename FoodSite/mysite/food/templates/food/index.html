@@ -1,0 +1,53 @@
+{% extends "food/base.html" %}
+
+{% block body %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold text-green-700 mb-6">Food Items</h2>
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {% for item in item_list %}
+    <li class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+      <a href="{% url 'food:detail' item.id %}" class="block">
+        <img src="{{item.item_image}}" alt="{{item.item_desc}}" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <p class="text-lg font-semibold text-gray-800">{{item.item_name|upper}}</p>
+           <p class="text-lg font-semibold text-gray-800">Posted By: {{item.user_name|capfirst}}</p>
+           <p class="text-lg font-semibold text-gray-800">Posted By: {{item.created_at|date:"d M Y"}}</p>
+            <p class="text-lg font-semibold text-gray-800">Time: {{item.created_at|time:"H:i"}}</p>
+             <p class="text-lg font-semibold text-gray-800">Added {{item.created_at|timesince}} ago</p>
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="flex items-center justify-center space-x-2 mt-6">
+    {% if item_list.has_previous %}
+        <a href="?page=1" 
+           class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">
+           First
+        </a>
+        <a href="?page={{ item_list.previous_page_number }}" 
+           class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">
+           Previous
+        </a>
+    {% endif %}
+
+    <span class="px-3 py-1 rounded bg-blue-500 text-white">
+        Page {{ item_list.number }} of {{ item_list.paginator.num_pages }}
+    </span>
+
+    {% if item_list.has_next %}
+        <a href="?page={{ item_list.next_page_number }}" 
+           class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">
+           Next
+        </a>
+        <a href="?page={{ item_list.paginator.num_pages }}" 
+           class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">
+           Last
+        </a>
+    {% endif %}
+</div>
+
+
+{% endblock %}

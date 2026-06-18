@@ -1,0 +1,22 @@
+pip install virtualenv
+virtualenv env
+cd env
+cd Scripts
+./activate
+cd ..
+cd ..
+pip install django
+django-admin startproject projectname
+python manage.py runserver
+python manage.py startapp appname
+
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py shell  
+exit() 
+
+python manage.py createsuperuser
+admin
+ak540@539
+
