@@ -25,7 +25,7 @@
         {% endif %}
 
         <div class="mt-6">
-            <button class="px-6 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition">
+            <button id='add-to-cart' class="px-6 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition">
                 Add to Cart
             </button>
             <button class="px-6 py-2 bg-gray-500 text-white font-semibold rounded transition">
@@ -34,4 +34,29 @@
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('add-to-cart').addEventListener('click', function() {
+    const quantity = document.getElementById('quantity').value;
+    fetch("{% url 'add_to_cart' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: JSON.stringify({
+            product_id: "{{ product.id }}",
+            quantity: quantity
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        document.getElementById("cart-count").textContent=data.cart_quantity
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+});
+</script>
 {% endblock body %}

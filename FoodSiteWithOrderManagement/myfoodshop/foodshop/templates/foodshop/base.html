@@ -13,6 +13,9 @@
                 <a href="{% url 'index' %}" class="text-gray-700 hover:text-green-600">Home</a>
                 <a href="#" class="text-gray-700 hover:text-green-600">About</a>
                 <a href="#" class="text-gray-700 hover:text-green-600">Contact</a>
+                <a id="cart-link" href="#" class="text-gray-700 hover:text-green-600 font-semibold">
+                Cart(<span id="cart-count">{{ cart|length }}</span>)
+               </a>
             </div>
         </div>
     </nav>
