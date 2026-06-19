@@ -19,6 +19,10 @@
                     {% else %}
                         <span class="inline-block px-2 py-1 text-xs font-semibold text-red-800 bg-red-100 rounded">Inactive</span>
                     {% endif %}
+                    <a href="{% url 'detail' product.slug %}" 
+                       class="inline-block mt-3 mx-10 px-4 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-700 transition">
+                       Know More
+                    </a>
                 </div>
             </div>
         {% empty %}
